@@ -14,9 +14,20 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
+    path: 'flights',
+    loadChildren: () =>
+      import('./features/flight/flight.module').then(
+        module => module.FlightModule
+      )
+  },
+  {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '/login'
   }
 ];
 
