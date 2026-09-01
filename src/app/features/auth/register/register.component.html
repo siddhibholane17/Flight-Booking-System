@@ -20,12 +20,15 @@
 
         <div
           class="error"
-          *ngIf="registerForm.get('name')?.touched &&
-                 registerForm.get('name')?.hasError('required')"
+          *ngIf="
+            registerForm.get('name')?.touched &&
+            registerForm.get('name')?.hasError('required')
+          "
         >
           Name is required.
         </div>
       </div>
+
 
       <!-- Email -->
       <div class="form-group">
@@ -38,22 +41,32 @@
           placeholder="Enter your email"
         />
 
+        <!-- Required error -->
         <div
           class="error"
-          *ngIf="registerForm.get('email')?.touched &&
-                 registerForm.get('email')?.hasError('required')"
+          *ngIf="
+            registerForm.get('email')?.touched &&
+            registerForm.get('email')?.hasError('required')
+          "
         >
           Email is required.
         </div>
 
+        <!-- Invalid email error -->
         <div
           class="error"
-          *ngIf="registerForm.get('email')?.touched &&
-                 registerForm.get('email')?.hasError('email')"
+          *ngIf="
+            registerForm.get('email')?.touched &&
+            (
+              registerForm.get('email')?.hasError('pattern') ||
+              registerForm.get('email')?.hasError('email')
+            )
+          "
         >
-          Please enter a valid email address.
+          Please enter a valid email address, for example: abc@gmail.com.
         </div>
       </div>
+
 
       <!-- Phone -->
       <div class="form-group">
@@ -66,22 +79,29 @@
           placeholder="Enter 10-digit phone number"
         />
 
+        <!-- Required error -->
         <div
           class="error"
-          *ngIf="registerForm.get('phone')?.touched &&
-                 registerForm.get('phone')?.hasError('required')"
+          *ngIf="
+            registerForm.get('phone')?.touched &&
+            registerForm.get('phone')?.hasError('required')
+          "
         >
           Phone number is required.
         </div>
 
+        <!-- Pattern error -->
         <div
           class="error"
-          *ngIf="registerForm.get('phone')?.touched &&
-                 registerForm.get('phone')?.hasError('pattern')"
+          *ngIf="
+            registerForm.get('phone')?.touched &&
+            registerForm.get('phone')?.hasError('pattern')
+          "
         >
-          Enter a valid 10-digit phone number.
+          Please enter a valid 10-digit phone number.
         </div>
       </div>
+
 
       <!-- Password -->
       <div class="form-group">
@@ -94,22 +114,29 @@
           placeholder="Enter your password"
         />
 
+        <!-- Required error -->
         <div
           class="error"
-          *ngIf="registerForm.get('password')?.touched &&
-                 registerForm.get('password')?.hasError('required')"
+          *ngIf="
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.hasError('required')
+          "
         >
           Password is required.
         </div>
 
+        <!-- Minimum length error -->
         <div
           class="error"
-          *ngIf="registerForm.get('password')?.touched &&
-                 registerForm.get('password')?.hasError('minlength')"
+          *ngIf="
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.hasError('minlength')
+          "
         >
           Password must be at least 6 characters.
         </div>
       </div>
+
 
       <!-- Confirm Password -->
       <div class="form-group">
@@ -122,23 +149,36 @@
           placeholder="Confirm your password"
         />
 
+        <!-- Required error -->
         <div
           class="error"
-          *ngIf="registerForm.get('confirmPassword')?.touched &&
-                 registerForm.get('confirmPassword')?.hasError('required')"
+          *ngIf="
+            registerForm.get('confirmPassword')?.touched &&
+            registerForm.get('confirmPassword')?.hasError('required')
+          "
         >
           Please confirm your password.
         </div>
       </div>
 
-      <!-- Messages -->
-      <div class="success" *ngIf="successMessage">
+
+      <!-- Success Message -->
+      <div
+        class="success"
+        *ngIf="successMessage"
+      >
         {{ successMessage }}
       </div>
 
-      <div class="error" *ngIf="errorMessage">
+
+      <!-- General Error Message -->
+      <div
+        class="error"
+        *ngIf="errorMessage"
+      >
         {{ errorMessage }}
       </div>
+
 
       <!-- Submit -->
       <button type="submit">
@@ -147,6 +187,8 @@
 
     </form>
 
+
+    <!-- Login Link -->
     <p>
       Already have an account?
       <a routerLink="/login">Login</a>

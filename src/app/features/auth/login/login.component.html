@@ -18,20 +18,29 @@
           placeholder="Enter your email"
         />
 
+        <!-- Required error -->
         <div
           class="error"
-          *ngIf="loginForm.get('email')?.touched &&
-                 loginForm.get('email')?.hasError('required')"
+          *ngIf="
+            loginForm.get('email')?.touched &&
+            loginForm.get('email')?.hasError('required')
+          "
         >
           Email is required.
         </div>
 
+        <!-- Invalid email / incomplete domain error -->
         <div
           class="error"
-          *ngIf="loginForm.get('email')?.touched &&
-                 loginForm.get('email')?.hasError('email')"
+          *ngIf="
+            loginForm.get('email')?.touched &&
+            (
+              loginForm.get('email')?.hasError('pattern') ||
+              loginForm.get('email')?.hasError('email')
+            )
+          "
         >
-          Please enter a valid email address.
+          Please enter a valid email address, for example: abc@gmail.com.
         </div>
       </div>
 
@@ -46,21 +55,31 @@
           placeholder="Enter your password"
         />
 
+        <!-- Password required error -->
         <div
           class="error"
-          *ngIf="loginForm.get('password')?.touched &&
-                 loginForm.get('password')?.hasError('required')"
+          *ngIf="
+            loginForm.get('password')?.touched &&
+            loginForm.get('password')?.hasError('required')
+          "
         >
           Password is required.
         </div>
       </div>
 
-      <!-- Messages -->
-      <div class="success" *ngIf="successMessage">
+      <!-- Success message -->
+      <div
+        class="success"
+        *ngIf="successMessage"
+      >
         {{ successMessage }}
       </div>
 
-      <div class="error" *ngIf="errorMessage">
+      <!-- General error message -->
+      <div
+        class="error"
+        *ngIf="errorMessage"
+      >
         {{ errorMessage }}
       </div>
 
