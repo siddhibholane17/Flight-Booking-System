@@ -3,13 +3,19 @@
   <div class="login-card">
 
     <h1>Flight Booking System</h1>
+
     <h2>Login</h2>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
 
-      <!-- Email -->
       <div class="form-group">
-        <label for="email">Email</label>
+
+        <label for="email">
+          Email
+        </label>
 
         <input
           id="email"
@@ -18,7 +24,6 @@
           placeholder="Enter your email"
         />
 
-        <!-- Required error -->
         <div
           class="error"
           *ngIf="
@@ -29,7 +34,6 @@
           Email is required.
         </div>
 
-        <!-- Invalid email / incomplete domain error -->
         <div
           class="error"
           *ngIf="
@@ -42,11 +46,15 @@
         >
           Please enter a valid email address, for example: abc@gmail.com.
         </div>
+
       </div>
 
-      <!-- Password -->
+
       <div class="form-group">
-        <label for="password">Password</label>
+
+        <label for="password">
+          Password
+        </label>
 
         <input
           id="password"
@@ -55,7 +63,6 @@
           placeholder="Enter your password"
         />
 
-        <!-- Password required error -->
         <div
           class="error"
           *ngIf="
@@ -65,9 +72,20 @@
         >
           Password is required.
         </div>
+
+
+        <div
+          class="error"
+          *ngIf="
+            loginForm.get('password')?.touched &&
+            loginForm.get('password')?.hasError('minlength')
+          "
+        >
+          Password must be at least 6 characters.
+        </div>
+
       </div>
 
-      <!-- Success message -->
       <div
         class="success"
         *ngIf="successMessage"
@@ -75,7 +93,7 @@
         {{ successMessage }}
       </div>
 
-      <!-- General error message -->
+
       <div
         class="error"
         *ngIf="errorMessage"
@@ -83,16 +101,21 @@
         {{ errorMessage }}
       </div>
 
-      <!-- Submit -->
-      <button type="submit">
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
         Login
       </button>
 
     </form>
 
+
     <p>
       Don't have an account?
-      <a routerLink="/register">Register</a>
+      <a routerLink="/register">
+        Register
+      </a>
     </p>
 
   </div>
