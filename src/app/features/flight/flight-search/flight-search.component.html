@@ -2,47 +2,9 @@
 
   <h1>Flight Search</h1>
 
-  <form [formGroup]="searchForm" (ngSubmit)="searchFlights()">
-
-    <div class="form-group">
-      <label for="from">From</label>
-      <input
-        id="from"
-        type="text"
-        formControlName="from"
-        placeholder="Enter departure city"
-      />
-
-      <small
-        *ngIf="searchForm.get('from')?.touched &&
-               searchForm.get('from')?.invalid"
-      >
-        Departure city is required.
-      </small>
-    </div>
-
-    <div class="form-group">
-      <label for="to">To</label>
-      <input
-        id="to"
-        type="text"
-        formControlName="to"
-        placeholder="Enter destination city"
-      />
-
-      <small
-        *ngIf="searchForm.get('to')?.touched &&
-               searchForm.get('to')?.invalid"
-      >
-        Destination city is required.
-      </small>
-    </div>
-
-    <button type="submit" [disabled]="searchForm.invalid">
-  Search Flights
-</button>
-
-  </form>
+  <app-flight-search-form
+    (search)="searchFlights($event)"
+  ></app-flight-search-form>
 
   <div *ngIf="searched">
 
@@ -56,7 +18,10 @@
       class="flight-card"
       *ngFor="let flight of flights"
     >
-      <h3>{{ flight.airline }} - {{ flight.flightNumber }}</h3>
+
+      <h3>
+        {{ flight.airline }} - {{ flight.flightNumber }}
+      </h3>
 
       <p>
         {{ flight.from }} → {{ flight.to }}
@@ -73,6 +38,7 @@
       <p>
         Price: ₹{{ flight.price }}
       </p>
+
     </div>
 
   </div>

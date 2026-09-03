@@ -1,0 +1,50 @@
+<form [formGroup]="searchForm" (ngSubmit)="searchFlights()">
+
+  <div class="form-group">
+
+    <label for="from">From</label>
+
+    <input
+      id="from"
+      type="text"
+      formControlName="from"
+      placeholder="Enter departure city"
+    />
+
+    <small
+      *ngIf="searchForm.get('from')?.touched &&
+             searchForm.get('from')?.hasError('required')"
+    >
+      Departure city is required.
+    </small>
+
+  </div>
+
+  <div class="form-group">
+
+    <label for="to">To</label>
+
+    <input
+      id="to"
+      type="text"
+      formControlName="to"
+      placeholder="Enter destination city"
+    />
+
+    <small
+      *ngIf="searchForm.get('to')?.touched &&
+             searchForm.get('to')?.hasError('required')"
+    >
+      Destination city is required.
+    </small>
+
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="searchForm.invalid"
+  >
+    Search Flights
+  </button>
+
+</form>
