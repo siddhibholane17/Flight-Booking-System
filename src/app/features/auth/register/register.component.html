@@ -1,0 +1,199 @@
+<div class="register-container">
+
+  <div class="register-card">
+
+    <h1>Flight Booking System</h1>
+    <h2>Create Account</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Full Name</label>
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter your full name"
+        />
+
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('name')?.touched &&
+            registerForm.get('name')?.hasError('required')
+          "
+        >
+          Name is required.
+        </div>
+      </div>
+
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+
+        <!-- Required error -->
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('email')?.touched &&
+            registerForm.get('email')?.hasError('required')
+          "
+        >
+          Email is required.
+        </div>
+
+        <!-- Invalid email error -->
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('email')?.touched &&
+            (
+              registerForm.get('email')?.hasError('pattern') ||
+              registerForm.get('email')?.hasError('email')
+            )
+          "
+        >
+          Please enter a valid email address, for example: abc@gmail.com.
+        </div>
+      </div>
+
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone</label>
+
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="Enter 10-digit phone number"
+        />
+
+        <!-- Required error -->
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('phone')?.touched &&
+            registerForm.get('phone')?.hasError('required')
+          "
+        >
+          Phone number is required.
+        </div>
+
+        <!-- Pattern error -->
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('phone')?.touched &&
+            registerForm.get('phone')?.hasError('pattern')
+          "
+        >
+          Please enter a valid 10-digit phone number.
+        </div>
+      </div>
+
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        <!-- Required error -->
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.hasError('required')
+          "
+        >
+          Password is required.
+        </div>
+
+        <!-- Minimum length error -->
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.hasError('minlength')
+          "
+        >
+          Password must be at least 6 characters.
+        </div>
+      </div>
+
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirm your password"
+        />
+
+        <!-- Required error -->
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('confirmPassword')?.touched &&
+            registerForm.get('confirmPassword')?.hasError('required')
+          "
+        >
+          Please confirm your password.
+        </div>
+      </div>
+
+
+      <!-- Success Message -->
+      <div
+        class="success"
+        *ngIf="successMessage"
+      >
+        {{ successMessage }}
+      </div>
+
+
+      <!-- General Error Message -->
+      <div
+        class="error"
+        *ngIf="errorMessage"
+      >
+        {{ errorMessage }}
+      </div>
+
+
+      <!-- Submit -->
+      <button type="submit">
+        Register
+      </button>
+
+    </form>
+
+
+    <!-- Login Link -->
+    <p>
+      Already have an account?
+      <a routerLink="/login">Login</a>
+    </p>
+
+  </div>
+
+</div>
