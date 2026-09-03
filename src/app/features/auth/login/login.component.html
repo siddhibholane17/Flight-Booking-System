@@ -1,0 +1,100 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h1>Flight Booking System</h1>
+    <h2>Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+
+        <!-- Required error -->
+        <div
+          class="error"
+          *ngIf="
+            loginForm.get('email')?.touched &&
+            loginForm.get('email')?.hasError('required')
+          "
+        >
+          Email is required.
+        </div>
+
+        <!-- Invalid email / incomplete domain error -->
+        <div
+          class="error"
+          *ngIf="
+            loginForm.get('email')?.touched &&
+            (
+              loginForm.get('email')?.hasError('pattern') ||
+              loginForm.get('email')?.hasError('email')
+            )
+          "
+        >
+          Please enter a valid email address, for example: abc@gmail.com.
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        <!-- Password required error -->
+        <div
+          class="error"
+          *ngIf="
+            loginForm.get('password')?.touched &&
+            loginForm.get('password')?.hasError('required')
+          "
+        >
+          Password is required.
+        </div>
+      </div>
+
+      <!-- Success message -->
+      <div
+        class="success"
+        *ngIf="successMessage"
+      >
+        {{ successMessage }}
+      </div>
+
+      <!-- General error message -->
+      <div
+        class="error"
+        *ngIf="errorMessage"
+      >
+        {{ errorMessage }}
+      </div>
+
+      <!-- Submit -->
+      <button type="submit">
+        Login
+      </button>
+
+    </form>
+
+    <p>
+      Don't have an account?
+      <a routerLink="/register">Register</a>
+    </p>
+
+  </div>
+
+</div>
